@@ -1,3 +1,48 @@
 Git&GitHub学习:视频
 https://www.bilibili.com/video/av24441039?p=38
 
+git中常见命令：
+
+  克隆  
+	git clone [代码库地址]
+
+地址简化 
+	git remote -v
+	git remote add [地址简化名称] [HTTPS地址]
+  
+  推送（想推送某段代码文件，该文件必须在对应的分支上）
+  	git push [地址简化名称] [分支名：如master]
+ 
+ //本地库操作：
+  查看 工作区 暂存区状态
+  		git status
+  
+  添加文件到 暂存区
+  		git add [文件名.格式]
+		git add .
+  
+  提交到本地库
+  		git commit [文件名.格式]
+		进入到vim编辑器 编辑 版本信息
+		或者一步 
+			git commit -m "版本改动信息名" [文件名.格式] // git commit -m "版本改动信息名" (多个文件事使用)
+ 查看版本信息
+		git log (全显)
+		git log --pretty=oneline （规范整理成一栏显示每一次版本调整）
+		git log --oneline  （规范整理成一栏显示每一次版本调整，相比上一个更简洁）
+		git reflog
+		
+ 版本控制的前进与后退
+ 		(1)
+			git reflog
+			git reset --hard [哈希值//索引值]
+		(2)使用^符号：只能后退
+			git reset --hard HEAD^  （回退一步就是一个^，回退n步就是n个^）
+		(3)使用~符号：只能后退
+			git reset --hard HEAD~3  （回退3步就写3，回退n步就写n）
+ 删除文件
+ 	rm [文件名.格式]
+ 找回文件
+ 	版本控制
+ 
+
