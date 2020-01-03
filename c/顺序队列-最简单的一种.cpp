@@ -62,9 +62,10 @@ queue enQueue(queue* q, int e)
 		printf("队满，无法写进元素！\n");
 	else
 	{
-		q->rear++;
+		
 		(q->data)[q->rear] = e;
 		printf("入队成功，入队元素为%d ,在第%d个位置\n", e, q->rear + 1);
+		q->rear++;
 		return *q;
 	}
 }
