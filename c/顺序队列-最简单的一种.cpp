@@ -7,7 +7,6 @@
 
 typedef struct qnode
 {
-	//int MAXSIZE;
 	int data[MAXSIZE];
 	int front, rear;
 }queue;
@@ -33,7 +32,6 @@ int main(void)
 
 queue init_queue(queue* q)
 {
-	//q = (queue*)malloc(sizeof(queue));
 	q->front = 0;
 	q->rear = 0;
 
