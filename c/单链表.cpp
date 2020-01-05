@@ -1,73 +1,74 @@
-/*单链表*/
+/* 单链表*/
+
 #include<stdio.h>
-#include<stdlib.h>
 #include<malloc.h>
+#include<stdlib.h>
 
-
-/*线性表的单链表存储结构*/
 typedef struct Node
 {
-	int data;         //数据域
-	struct Node* next; //指针域
-}Node, *linklist;
+	int data;
+	struct Node* next;
+}Node, * linklist;
 
-/*创建链表(头插法)，并产生n个元素的值*/
-linklist creat_linklist(linklist,int);
-void Getelem(linklist,int); //读取单链表
+linklist create_linklist(linklist, int);
+void Getelem(linklist, int);
 
 int main(void)
 {
-	Node L;
-	creat_linklist(&L, 5);
-	Getelem(&L,5);
+	linklist  L = (linklist)malloc(sizeof(Node));	/*初始化*/
+	L->next = NULL;
+
+	create_linklist(L, 5);/*插入创建链表*/
+	Getelem(L, 5);         /*遍历链表*/
 
 	return 0;
 }
 
-linklist creat_linklist(linklist L,int n)
+linklist create_linklist(linklist L, int n) //头插法：后来先到
 {
-	linklist p;  //小结点
-	int i, val;
-
-	/*1.先建立一个带头结点的单链表*/
-	 L = (linklist)malloc(sizeof(Node));
-	if (NULL == L)
+	int val;
+	printf("请为您的结点赋值（换行输入）：\n");
+	for (int i = 0; i < n; ++i)
 	{
-		printf("分配失败！\n");
-		exit(-1);
-	}
-	L->next = NULL;
-
-	/*2.在之前的基础上插入结点*/
-	printf("请为您的结点赋值，中间用空格隔开：");
-	for (i = 0; i < n; ++i)
-	{
-		p = (linklist)malloc(sizeof(Node)); //生成新结点
-		scanf_s("%d ", &val); 
-		p->data = val;
-		
-		p->next = L->next;
-		L->next = p;  //插入到表头
+		linklist p = (linklist)malloc(sizeof(Node));     //分配一个p结点
+		if (NULL == p)
+			exit(-1);
+		scanf_s("%d", &val);
+		p->data = val;          //赋值
+		p->next = L->next;      //p结点插入
+		L->next = p;
 	}
 	return L;
 }
 
-void Getelem(linklist L,int i)
+void Getelem(linklist L, int i)
 {
-	int j;
-	linklist p;				//声明一结点p
-	p = L->next;			//让p指向链表L的第一个结点
+	int j = 0;
+	linklist p;
+	p = L->next;
 	printf("元素为：");
-	j = 1;
-	while (p && j < i)		//p不为空且j<iS
+	while (p && j < i)
 	{
-		
-		p = p->next;		//让p指向下一结点
-		printf("%d", p->data);
+		printf("% d", p->data);
+		p = p->next;
 		++j;
 	}
-	if (!p || j > i)
-		printf("ERROR!\n");
+	if (!p || j >= i)
+		exit(-1);
 
 	return;
 }
+
+
+/*
+请为您的结点赋值（换行输入）：
+4
+5
+6
+9
+5
+元素为： 5 9 6 5 4
+-------------------------------
+通过vs2019编写，2020/1/5
+-------------------------------
+*/
