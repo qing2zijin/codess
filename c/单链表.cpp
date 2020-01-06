@@ -1,4 +1,4 @@
-/* 单链表*/
+* 单链表* /
 
 #include<stdio.h>
 #include<malloc.h>
@@ -10,24 +10,30 @@ typedef struct Node
 	struct Node* next;
 }Node, * linklist;
 
-linklist create_linklist(linklist, int);
-void Getelem(linklist, int);
-void search_elem(linklist, int);
-
+linklist create_linklist(linklist, int); //创建链表
+void Getelem(linklist, int);              //遍历
+void search_elem(linklist, int);		  //查找
+linklist list_delete(linklist, int);       //删除表中的第n个元素
 
 int main(void)
 {
 	int n;
+	int i;
 	linklist  L = (linklist)malloc(sizeof(Node));	/*初始化*/
 	L->next = NULL;
 
 	printf("您想要的链表长度是多少？");
 	scanf_s("%d", &n);
 
-	create_linklist(L, n);/*插入创建链表*/
-	Getelem(L, n);         /*遍历链表*/
-	search_elem(L, 3);     /*查找表中第三个元素*/
+	create_linklist(L, n);       //插入创建链表
+	Getelem(L, n);               //遍历链表
+	search_elem(L, 3);           //查找表中第三个元素
 
+	printf("输入您想删除第几个元素：");
+	scanf_s("%d", &i);
+	list_delete(L, i);
+
+	Getelem(L, n - 1);
 	return 0;
 }
 /*
@@ -64,7 +70,7 @@ linklist create_linklist(linklist L, int n)
 		p->data = val;
 		p->next = NULL;
 		Ptail->next = p;
-		Ptail = p;     //新来的结点都会被替换成尾结点
+		Ptail = p;         //新来的结点都会被替换成尾结点
 	}
 	/*printf("尾结点的数据域为%d\n", Ptail->data);*/
 	Ptail->next = NULL;
@@ -76,7 +82,7 @@ void Getelem(linklist L, int i)
 	int j = 0;
 	linklist p;
 	p = L->next;
-	printf("元素为：");
+	printf("链表中的各元素为：");
 	while (p && j < i)
 	{
 		printf("% d", p->data);
@@ -100,15 +106,30 @@ void search_elem(linklist L, int n)
 	return;
 }
 
+linklist list_delete(linklist L, int n)
+{
+	linklist p = L;
+	int i = 1;
+	while (p && i < n)        //遍历到第n个结点的前一个结点，即将要删除的结点的前一个结点。
+	{
+		p = p->next;
+		++i;
+	}
+	if (!(p->next) && i > n)
+		printf("ERROR\n");
+
+	linklist q = p->next;     //q结点介于p结点和p->next->next间，将p->next赋值给q，简化后续操作
+	p->next = q->next;		 //将q的后继赋值给p的后继，绕过q结点，将二者“连接”
+	free(q);				 //让系统回收此结点q，释放内存
+
+	return L;
+}
+
 
 /*  （头插法）
 请为您的结点赋值（换行输入）：
-4
-5
-6
-9
-5
-元素为： 5 9 6 5 4
+4 5 6 9 5
+链表中各个元素为： 5 9 6 5 4
 -------------------------------
 通过vs2019编写，2020/1/5
 -------------------------------
@@ -116,13 +137,9 @@ void search_elem(linklist L, int n)
 
 /*（尾插法）
 请为您的结点赋值（换行输入）：
-1
-2
-3
-4
-5
+1 2 3 4 5
 尾结点的数据域为5
-元素为： 1 2 3 4 5
+链表中各个元素为： 1 2 3 4 5
 --------------------------------
 通过vs2019编写，2020/1/5
 --------------------------------
@@ -132,9 +149,20 @@ void search_elem(linklist L, int n)
 您想要的链表长度是多少？5
 请为您的结点赋值：
 12 3 4 5 6
-元素为： 12 3 4 5 6
+链表中各个元素为： 12 3 4 5 6
 第三个元素为4
---------------------------------
-通过vs2019编写，2020/1/5
---------------------------------
+*/
+
+/* （删除结点）
+您想要的链表长度是多少？5
+请为您的结点赋值：
+45 2 31 3 19
+链表中的各元素为： 45 2 31 3 19
+第三个元素为31
+输入您想删除第几个元素：3
+链表中的各元素为： 45 2 3 19
+*/
+
+/**
+*尾插法更好，头插法遍历结果是倒序的，会让数据处理变得更麻烦。 2020/1/6
 */
