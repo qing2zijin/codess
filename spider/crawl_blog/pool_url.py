@@ -22,7 +22,7 @@ class url_addr(object):
                 }
                 formdata = urllib.parse.urlencode(values).encode('utf8')
                 response = urllib.request.Request(url=api_url, headers=headers)
-                data = urllib.request.urlopen(response, formdata).read().decode('utf8')
+                data = urllib.request.urlopen(response, formdata, timeout=5).read().decode('utf8')
                 
                 pat = '"url":"(.*?)"}\S'
                 url_addr = re.compile(pat, re.S).findall(data)
