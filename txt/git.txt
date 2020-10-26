@@ -1,5 +1,11 @@
 Git&GitHub学习:视频
-https://www.bilibili.com/video/av24441039?p=38
+//https://www.bilibili.com/video/av24441039?p=38
+
+	https://www.runoob.com/git/git-workspace-index-repo.html
+	工作区（Working Directory）：是可以直接编辑的地方。
+	暂存区（Stage/Index）：数据暂时存放的区域。
+	版本库（commit History）：存放已经提交的数据（.git）
+
 
 git中常见命令：
 
@@ -24,7 +30,7 @@ git中常见命令：
   提交到本地库
   		git commit [文件名.格式]
 		进入到vim编辑器 编辑 版本信息
-		[(windows下)vim编辑器的一些操作：wq退出，i插入编辑，Esc退出到命令窗口]
+		vim编辑器的一些操作：wq退出，i插入编辑，Esc退出到命令窗口]
 		或者一步 
 			git commit -m "版本改动信息名" [文件名.格式] // git commit -m "版本改动信息名" (多个文件事使用)
  查看版本信息
@@ -53,4 +59,22 @@ git中常见命令：
 	更改文件名
 		git mv [文件名.格式] [新文件名.格式] （！！文件位置）
 
-//how to delete a file, and to push version.see here:https://blog.csdn.net/qq_42780289/article/details/98353792
+	2020.10.26补充：
+
+移除文件：git rm命令的使用：（参考：https://www.runoob.com/git/git-rm.html）
+	
+
+	
+	1.删除命令：git rm file 
+		那么就会将工作区和暂存区的文件file删掉，但是没有删除版本库中的文件，
+		之后就 git commit -m "--"指令删除版本库中的文件。
+		git push ...推送到云端。
+	
+	2.	git rm -f <file>  强行从暂存区和工作区中删除修改后的 file文件：
+	
+	3.	git rm --cached <file>从暂存区(文件index/跟踪清单)中删除file文件，而工作区的保持不变。
+	
+	4.	删除文件 rm <file>(linux下的删除文件命令)
+	直接就将工作区的文件hello.txt删掉了，但是没有删除暂存区、版本库的文件，所有就要增加一条指令：
+	 git add test.txt
+	 git commit -m "delete test"
