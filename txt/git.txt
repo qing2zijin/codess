@@ -53,3 +53,4 @@ git中常见命令：
 	更改文件名
 		git mv [文件名.格式] [新文件名.格式] （！！文件位置）
 
+//how to delete a file, and to push version.see here:https://blog.csdn.net/qq_42780289/article/details/98353792
