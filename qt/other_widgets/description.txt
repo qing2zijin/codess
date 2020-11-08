@@ -1,0 +1,14 @@
+这里主要介绍的是：
+
+    //QLCDNumber可以让数码字符显示类似液晶数字
+
+    //QStackedWidget 类提供一个部件栈，可以有多个界面（称为页面），每个界面可以拥有自己的部件，不过每次只能显示一个界面。
+    //这个部件需要使用QComboxBox或者QListWidget来选择他的各个页面
+
+    //QToolBox类提供了一列层叠窗口部件，就像QQ中的抽屉效果
+
+//3.3.2按钮部件 QAbstractButton类是按钮部件的抽象基类，提供了按钮的通用功能
+    //1.QPushButton 提供一个标准的按钮
+    //2.QChecked QRadioButton和QGroupBox 对于调查表之类的应用，往往提供多个选择供选择。
+        //QChecked提供多个选择，QRadioButton提供一个选择，一般把一组按钮放到QGroupBox里面进行管理。
+    //3.QLineEdit部件是一个单行的文本编辑器，它允许用户输入和编辑单行的纯文本内容
