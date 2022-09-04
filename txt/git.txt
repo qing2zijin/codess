@@ -41,7 +41,7 @@ git中常见命令：
 		
  版本控制的前进与后退
  		(1)
-			git reflog
+			git reflog  【这个好用】
 			git reset --hard [哈希值//索引值]
 		(2)使用^符号：只能后退
 			git reset --hard HEAD^  （回退一步就是一个^，回退n步就是n个^）
@@ -61,7 +61,7 @@ git中常见命令：
 
 	2020.10.26补充：
 
-移除文件：git rm命令的使用：（参考：https://www.runoob.com/git/git-rm.html）
+移除文件：git rm命令的使用：（参考：https://www.runoob.com/git/git-rm.html ）
 	
 
 	
@@ -78,3 +78,19 @@ git中常见命令：
 	直接就将工作区的文件hello.txt删掉了，但是没有删除暂存区、版本库的文件，所有就要增加一条指令：
 	 git add test.txt
 	 git commit -m "delete test"
+	 
+=========================================================================================
+    	查看文件变化差异：git diff <filename>
+	
+
+
+=========================================================================================
+	Git报错：error:failed to push some refs to 的处理  https://baijiahao.baidu.com/s?id=1723429795845255176&wfr=spider&for=pc
+		git pull --rebase [远程地址]  master
+		git push -u [远程地址] master
+
+=========================================================================================
+
+	git 清理 https://zhuanlan.zhihu.com/p/377661967
+
+	
