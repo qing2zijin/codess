@@ -22,57 +22,51 @@ def random_headers(isPc, cookie = None): #isPc: 是否是PC端 有的时候，ra
     
     return headers
 
-def get_htmlData(url, Method, decodel=None, headers=None, encodel=None, data_dic=None):
-    """ 
-    decode的作用是将其他编码的字符串转换成unicode编码（解码）
-    encode的作用是将unicode编码转换成其他编码的字符串（编码）
-    """
+def get_htmlData(url, Method, decodel=None, headers=None, encodel=None, data_dic=None, cnt=None):
+    if cnt == None:
+        cnt = 3
     if decodel == None:
         decodel = "utf-8"
     data = None
-    flag = True
-    out_time = 6
+    out_time = 5
     n = 1
-    while flag:
+    while True:
+        if n>=cnt:
+            break
         try:
             if n > 1:            
                 print("第%s次请求开始%s"%(n, url))
             if Method == "POST":
+                if data_dic == None:
+                    print("data_dic is empty !")
+                    break
                 if encodel == None:
                     encodel = "utf-8"
-                formdata = urlParse.urlencode(data_dic).encode(encodel)
+                formdata = urlParse.urlencode(data_dic).encode(encodel,"ignore")
                 response = UR.Request(url=url, headers=headers, method=Method)
                 pre_data = UR.urlopen(response, formdata, timeout=out_time)   #POST
                 charset = pre_data.info().get_param("charset")
                 if charset != None:
                     decodel = charset
             elif Method == "GET":
-                request = UR.Request(url=url, headers=headers, method=Method)  #GET
+                request  = UR.Request(url=url, headers=headers, method=Method)  #GET
                 pre_data = UR.urlopen(request, timeout=out_time)
                 charset = pre_data.info().get_param("charset")
                 if charset != None:
                     decodel = charset
             else:
-                print("Method error, Method is POST or GET")
-                return None
-            
-            status_code = pre_data.getcode()          
-            if status_code == 404 or status_code == 403:
-                flag = False
+                print("目前只支持GET和POST这两种方式")
                 break
             data = pre_data.read().decode(decodel,"ignore") #
-                
         except Exception as error:
             print(error)
+        #循环判断
         if data != None:
-            flag = False
+            break
         else:
             out_time += 2
             n += 1
-            flag = True
-            delay(n)
-        if n>2:
-            flag = False
+            delay(1)
     return data
 
 def html_lxml(data, xpath):   #lxml方式
